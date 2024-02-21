@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let currentQuestionIndex = 0;
     let timer;
     let score = 0;
-    let secondsLeft = 100; // Declare secondsLeft variable
+    let secondsLeft = 200; // Declare secondsLeft variable
 
     startBtn.addEventListener("click", startQuiz);
 
@@ -66,7 +66,7 @@ document.addEventListener("DOMContentLoaded", function () {
         setTimeout(() => {
             resultContainer.innerHTML = "";
             loadQuestion();
-        }, 1000);
+        }, 2000);
     }
     
 
