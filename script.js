@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 ${currentQuestion.options.map(option => `<button class="option-btn">${option}</button>`).join('')}
             `;
 
-            
+
             // Add event listener for all buttons with class "option-btn"
             const optionButtons = document.querySelectorAll('.option-btn');
             optionButtons.forEach(button => {
@@ -66,7 +66,7 @@ document.addEventListener("DOMContentLoaded", function () {
         setTimeout(() => {
             resultContainer.innerHTML = "";
             loadQuestion();
-        }, 3000);
+        }, 1000);
     }
     
 
@@ -88,7 +88,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function endQuiz() {
         clearInterval(timer);
         questionContainer.innerHTML = "Quiz completed";
-        resultContainer.innerHTML = `Your Score is: ${score}`;
+        resultContainer.innerHTML = `Your Score is:  ${score}`;
 
 
         console.log("Your score is: " + score);
@@ -107,6 +107,9 @@ document.addEventListener("DOMContentLoaded", function () {
     
         // Check if the user entered initials
         if (userInitials !== null && userInitials.trim() !== "") {
+
+            resultContainer.innerHTML = `${userInitials.toUpperCase()}, Your Score is: ${score}`;
+
             // Save the user's initials and score (you can modify this part based on your needs)
             var savedScores = JSON.parse(localStorage.getItem("scores")) || [];
             savedScores.push({ initials: userInitials, score: score });
