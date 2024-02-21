@@ -1,3 +1,5 @@
+//declare variables
+
 document.addEventListener("DOMContentLoaded", function () {
     const startBtn = document.getElementById("start-btn");
     const questionContainer = document.getElementById("question-container");
@@ -31,6 +33,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 ${currentQuestion.options.map(option => `<button class="option-btn">${option}</button>`).join('')}
             `;
 
+            
             // Add event listener for all buttons with class "option-btn"
             const optionButtons = document.querySelectorAll('.option-btn');
             optionButtons.forEach(button => {
@@ -43,26 +46,29 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function checkAnswer(selectedAnswer) {
         const currentQuestion = questions[currentQuestionIndex];
+    
         if (selectedAnswer === currentQuestion.correctAnswer) {
-            resultContainer.innerHTML = "Correct!";
+            resultContainer.innerHTML = "Oin, Correct, You're doing well 😀!, ";
             // Add 10 points for the correct answer
             score += 10;
         } else {
-            resultContainer.innerHTML = "Incorrect!";
+            // Display the correct answer in the result message
+            resultContainer.innerHTML = `Incorrect Answer 😔! <p style="color: red;">The correct answer is: ${currentQuestion.correctAnswer}</p>`;
             // Subtract 10 seconds for an incorrect answer
             secondsLeft -= 10;
             if (secondsLeft < 0) {
-                secondsLeft = 0; // Ensure secondsLeft doesn't go negative
+                secondsLeft = 0;
             }
         }
-
+    
         currentQuestionIndex++;
         // Clear result container after displaying the result
         setTimeout(() => {
             resultContainer.innerHTML = "";
             loadQuestion();
-        }, 1000);
+        }, 3000);
     }
+    
 
     function startTimer() {
         timer = setInterval(function () {
@@ -77,11 +83,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function updateTimerDisplay(seconds) {
         // Display an empty string to hide "Time Remaining:" text
-        timerDisplay.textContent = seconds > 0 ? `${seconds}s` : "";
+        timerDisplay.textContent = seconds > 0 ? `${seconds}seconds 🕐` : "";
     }
     function endQuiz() {
         clearInterval(timer);
-        questionContainer.innerHTML = "Quiz Over!";
+        questionContainer.innerHTML = "Quiz completed";
         resultContainer.innerHTML = `Your Score is: ${score}`;
 
 
@@ -106,8 +112,9 @@ document.addEventListener("DOMContentLoaded", function () {
             savedScores.push({ initials: userInitials, score: score });
             localStorage.setItem("scores", JSON.stringify(savedScores));
     
+
             // Display a confirmation message
-            alert("Score saved successfully!");
+            alert("Your scores have been saved successfully!");
         } else {
             // Handle the case where the user didn't enter initials
             alert("Please enter your initials to save the score.");
